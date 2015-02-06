@@ -33,8 +33,10 @@ class Elevator
 end
 
 class Building
-  def initialize(floors)
+  attr_reader :name, :floors
+  def initialize(floors, name)
     @floors = floors
+    @name = name
   end
 end
 
@@ -57,8 +59,9 @@ class System
   end
 end
 
-@system = System.new("Empire State")
-@elevator = Elevator.new(30)
+@building = Building.new(30, "Empire State")
+@system = System.new(@building.name)
+@elevator = Elevator.new(@building.floors)
 
 
 puts "Current elevator location is #{@elevator.location}"
