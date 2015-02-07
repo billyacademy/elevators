@@ -22,7 +22,7 @@ class Elevator
         @state = "going up"
         puts "Status of #{@name}: #{@state}"
         @location += 1
-        sleep(0.5)
+        sleep(0.25)
         puts "#{@name} at floor #{@location}"
       end
     end
@@ -35,7 +35,7 @@ class Elevator
       @state = "going down"
       puts "Status of #{@name}: #{@state}"
       @location -= 1
-      sleep(0.5)
+      sleep(0.25)
       puts "#{@name} at floor #{@location}"
     end
     @state = "idle"
@@ -67,8 +67,6 @@ class System
 
   end
 
-  #a system tells the elevator to come to floor 18 and bring
-  #the patron to the lobby
   def call_elevator_from_floor(floor, elevator)
     if elevator.location > floor
       elevator.down(floor)
@@ -98,53 +96,25 @@ end
 @system = System.new(@building.name, [])
 @elevator = Elevator.new("elevator1", @building.floors)
 @elevator2 = Elevator.new("elevator2", @building.floors)
+@elevator3 = Elevator.new("elevator3", @building.floors)
+@elevator4 = Elevator.new("elevator4", @building.floors)
+@elevator5 = Elevator.new("elevator5", @building.floors)
+@elevator6 = Elevator.new("elevator6", @building.floors)
+
 
 @system.elevators << @elevator
 @system.elevators << @elevator2
-
+@system.elevators << @elevator3
+@system.elevators << @elevator4
+@system.elevators << @elevator5
+@system.elevators << @elevator6
 queue = []
 
 
 
 
 
-
-# puts "Current elevator location is #{@elevator.location}"
-@system.call_elevator_from_floor(10, @system.closest_elevator(10))
-
-@system.call_elevator_from_floor(4, @system.closest_elevator(4))
-#
-#
-# puts "Person waiting on floor 10"
-# closest_elevator = elevators.first
-# elevators.each do |elevator|
-#   distance = (elevator.location - 10).abs
-#   if distance <= closest_elevator.location - 10
-#     closest_elevator = elevator
-#   end
-# end
-# @system.call_elevator_from_floor(10, closest_elevator)
-#
-# elevators.each do |elevator|
-#   request = 8
-#   distance = (elevator.location - request).abs
-#   if distance <= closest_elevator.location - request
-#     closest_elevator = elevator
-#   end
-# end
-# @system.call_elevator_from_floor(request, closest_elevator)
-#
-# elevators.each do |elevator|
-#   request = 2
-#   distance = (elevator.location - request).abs
-#   if distance <= closest_elevator.location - request
-#     closest_elevator = elevator
-#   end
-# end
-# @system.call_elevator_from_floor(request, closest_elevator)
-
-# puts "Current elevator location is #{@elevator.location}"
-# @system.call_elevator(10, @elevator)
-# puts "Current elevator location is #{@elevator.location}"
-# @system.call_elevator(40, @elevator)
-# puts "Current elevator location is #{@elevator.location}"
+10.times do
+  n = rand(0..30)
+  queue << @system.call_elevator_from_floor(n, @system.closest_elevator(n))
+end
